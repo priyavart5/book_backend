@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes';
+import bookRoutes from './routes/book.routes';
 import { errorHandler, routeMiddleware } from './middleware';
 import requestIp from 'request-ip';
 
@@ -25,6 +26,7 @@ app.use("/hello", (_req, res) => {
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/books', bookRoutes);
 
 
 // Error handling
@@ -44,3 +46,5 @@ mongoose
   .catch((error) => {
     console.error('MongoDB connection error:', error);
   }); 
+
+// https://book-backend-nr9r.onrender.com/
