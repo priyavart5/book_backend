@@ -24,6 +24,16 @@ export const createBook = async(req: any, res: any) => {
 
 export const updateBook = async (req: any, res: any) => {
     try {
+        const updateData: { title: any; author: any; description: any; image?: string } = {
+          title: req.body.title,
+          author: req.body.author,
+          description: req.body.description
+        };
+    
+        if (req.file) {
+          updateData.image = req.file.path;
+        }
+        
         const book = await Book.findOneAndUpdate(
             { _id: req.params.id, user: req.user.userId }, 
             req.body, 
@@ -38,7 +48,7 @@ export const updateBook = async (req: any, res: any) => {
     } catch (error) {
         return res.status(500).json({ message: "Something went wrong while updating a book." , error })
     }
-  };
+};
 
 
 export const deleteBook = async(req: any, res: any) => {

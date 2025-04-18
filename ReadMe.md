@@ -1,30 +1,141 @@
-# Book Management App
+# 📚 Book Management App - Backend
 
-## Requirements
-- **Frontend**: Create a user-friendly interface that allows users to:
-  - Add new books to their collection
-  - Edit existing book details
-  - Delete books from their collection
-  - View a list of all books in their collection
+This is the backend for the Book Management App, built using **Node.js**, **Express**, and **MongoDB** with **Mongoose**. It handles all book-related operations (CRUD) and integrates with a pre-built authentication system for user management and authorization.
 
-- **Backend**: You will be provided with an authentication backend codebase. You are required to integrate this with your application to handle user authentication and authorization.
+---
 
-## Provided Resources
-- **Auth Backend Codebase**: There is already pre-built authentication backend. You will need to familiarize yourself with this codebase and integrate it into your application.
+## ⚙️ Tech Stack
 
-## Technical Specifications
-- **Frontend Framework**: You may use any JavaScript framework (e.g., React, Angular, Vue.js).
-- **Backend**: You can choose to use Node.js, Express, or any other backend technology you are comfortable with.
-- **Database**: Use a database of your choice (e.g., MongoDB, PostgreSQL) to store book information
-(if using MongoDB use mongoose as ORM, if using PostgresSQL you can use TypeORM, or you can use any other ORM as well)
+- **Node.js**
+- **Express.js**
+- **MongoDB** with **Mongoose**
+- **TypeScript**
+- **Multer** (for image uploads)
+- **JWT Authentication** (integrated via pre-built auth middleware)
 
-## Submission Guidelines
-- Include a README file that explains how to set up and run your application.
-- Ensure your code is well-documented and follows best practices.
+---
 
-## Evaluation Criteria
-- Code quality and organization
-- User interface design and usability
-- Proper integration of the authentication backend
-- Functionality and completeness of the application
+## 📁 Project Structure
 
+```
+BOOK_BACKEND/
+├── dist/                    # Compiled JS output
+├── node_modules/
+├── src/
+│   ├── controllers/         # Auth and Book logic (create, update, delete, etc.)
+│   ├── middleware/          # Auth, Error, Route, Upload middleware
+│   ├── models/              # Mongoose schemas
+│   ├── routes/              # Express route handlers
+│   ├── utils/               # Multer config, helpers
+│   └── index.ts             # Main app entry point
+├── uploads/                 # Uploaded book images (served statically)
+├── .env                     # Environment variables (HIDDEN)
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── README.md                # This file
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/priyavart5/book_backend.git
+cd book_backend
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env` file in the root directory and add:
+
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://priyavart5:Enter%40512002@pvcluster.tg4e7.mongodb.net/book_assessment?retryWrites=true&w=majority&appName=pvCluster
+JWT_SECRET=32e7d32559939f1d47d088894e192500f59458c26c2e66cc931c12cd20fda83d
+```
+
+### 4. Run the server
+
+For development (with hot-reload):
+
+```bash
+npm run dev
+```
+
+For production:
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## 📤 Image Uploads
+
+Uploaded images are stored in the `/uploads` directory and served statically at:
+
+```
+http://localhost:5000/uploads/<image-name>
+```
+
+Make sure this directory exists, or it will be auto-created on upload.
+
+---
+
+## 🔐 Authentication
+
+Authentication is handled via a pre-built middleware using JWT. Ensure you attach the token to API requests using the `Authorization: Bearer <token>` header.
+
+---
+
+## 📚 API Endpoints
+
+| Method | Endpoint             | Description                | Auth |
+|--------|----------------------|----------------------------|------|
+| GET    | `/api/books`         | Fetch all user books       | ✅   |
+| POST   | `/api/books`         | Add a new book (with image)| ✅   |
+| PUT    | `/api/books/:id`     | Update book details        | ✅   |
+| DELETE | `/api/books/:id`     | Delete a book              | ✅   |
+| PATCH  | `/api/books/:id`     | Toggle favourite           | ✅   |
+
+---
+
+## 🛠️ Book Object Schema
+
+```ts
+{
+  _id: string,
+  image: string,
+  title: string,
+  author: string,
+  description: string,
+  user: string,       // Reference to User
+  favourite: boolean,
+  createdAt: string,
+  updatedAt: string
+}
+```
+
+---
+
+## 🧪 Testing
+
+Use Postman or your frontend to interact with the API. Ensure your JWT token is attached in headers.
+
+---
+
+## 🙌 Acknowledgements
+
+- Built by Priyavart Vashisht.
+
+---
