@@ -7,10 +7,16 @@ import bookRoutes from './routes/book.routes';
 import { errorHandler, routeMiddleware } from './middleware';
 import requestIp from 'request-ip';
 import path from 'path';
+import fs from 'fs';
 
 dotenv.config();
 
 const app = express();
+
+const uploadsPath = path.join(__dirname, '..', 'uploads');
+if (!fs.existsSync(uploadsPath)) {
+  fs.mkdirSync(uploadsPath, { recursive: true });
+}
 
 // Middleware
 app.use(
@@ -21,7 +27,7 @@ app.use(
 );
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+app.use('/uploads', express.static(uploadsPath));
 
 // Route Middleware
 app.use(requestIp.mw());
