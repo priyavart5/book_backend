@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.routes';
 import bookRoutes from './routes/book.routes';
 import { errorHandler, routeMiddleware } from './middleware';
 import requestIp from 'request-ip';
+import path from 'path';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use('../uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // Route Middleware
 app.use(requestIp.mw());
@@ -47,4 +49,5 @@ mongoose
     console.error('MongoDB connection error:', error);
   }); 
 
+// https://book-frontend-psi.vercel.app/
 // https://book-backend-nr9r.onrender.com/

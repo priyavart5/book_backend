@@ -13,7 +13,7 @@ export const getAllBooks = async(req: any, res: any) => {
 
 export const createBook = async(req: any, res: any) => {
     try {
-        const newBook = new Book({ ...req.body, user: req.user.userId });
+        const newBook = new Book({ ...req.body, image: req.file.path, user: req.user.userId });
         const savedBook = await newBook.save();
     
         return res.status(200).json({ message: "New Book added." , savedBook })

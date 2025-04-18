@@ -1,6 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
 
 const bookSchema = new Schema({
+    image: {
+        type: String,
+        required: true
+    },
     title: { 
         type: String, 
         required: true 
