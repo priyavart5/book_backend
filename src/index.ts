@@ -13,8 +13,14 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'https://book-frontend-psi.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+  })
+);
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // Route Middleware
