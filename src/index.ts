@@ -21,7 +21,7 @@ if (!fs.existsSync(uploadsPath)) {
 // Middleware
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'https://book-frontend-psi.vercel.app'],
+    origin: ['http://localhost:3000', 'https://book-frontend-wine.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE']
   })
 );
@@ -59,7 +59,4 @@ mongoose
   })
   .catch((error) => {
     console.error('MongoDB connection error:', error);
-  }); 
-
-// https://book-frontend-psi.vercel.app/
-// https://book-backend-nr9r.onrender.com/
+}); 
